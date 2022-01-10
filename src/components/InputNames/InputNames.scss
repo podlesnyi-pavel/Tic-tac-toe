@@ -1,0 +1,46 @@
+@import '../../styles/main.scss';
+
+.inputnames {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 24px;
+  border-radius: 20px;
+  background-color: $secondary-color;
+  font-size: 16px;
+  color: $color-white;
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+
+    &:nth-child(2) {
+      margin-top: 16px;
+    }
+  }
+
+  &__input {
+    margin-top: 5px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: inherit;
+    outline: none;
+  }
+
+  &__button {
+    width: max-content;
+    margin: 20px auto 0;
+    padding: 8px 16px;
+    border: 1px solid $color-white;
+    border-radius: 4px;
+    font-size: inherit;
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+      background-color: $main-color;
+      color: $color-white;
+      transition-duration: $transition-duration-default;
+    }
+  }
+}

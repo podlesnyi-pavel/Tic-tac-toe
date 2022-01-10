@@ -1,0 +1,19 @@
+@import '../../styles/main.scss';
+
+.square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include square(100px);
+  background-color: $secondary-color;
+  border: 1px solid #222;
+  font-size: 80px;
+  color: #eed;
+  text-transform: uppercase;
+  outline: none;
+
+  // &:hover {
+  //   background-color: #f0f0f0;
+  //   transition: $transition-duration-default;
+  // }
+}

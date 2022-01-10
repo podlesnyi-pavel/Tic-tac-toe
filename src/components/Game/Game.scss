@@ -1,0 +1,17 @@
+@import '../../styles/main.scss';
+
+.game {
+  display: flex;
+
+  &__score {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    font-size: 25px;
+    color: $color-white;
+
+    & > span:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+}

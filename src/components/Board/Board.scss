@@ -1,0 +1,7 @@
+@import '../../styles/main.scss';
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  @include square(300px);
+}
