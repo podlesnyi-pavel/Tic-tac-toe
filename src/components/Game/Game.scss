@@ -2,14 +2,20 @@
 
 .game {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+
 
   &__score {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-top: 20px;
     font-size: 25px;
     color: $color-white;
+
+    @media (min-width: 440px) {
+      margin-left: 20px;
+    }
 
     & > span:not(:first-child) {
       margin-top: 10px;
