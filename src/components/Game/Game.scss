@@ -20,3 +20,27 @@
     margin-top: 25px;
   }
 }
+
+.resultModal {
+  position: absolute;
+  @include position-center;
+  z-index: 300;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  width: 200px;
+  padding: 10px 15px;
+  border: 2px solid $color-white;
+  border-radius: 10px;
+  background-color: #9819ca;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  visibility: hidden;
+
+  &--visible {
+    visibility: visible;
+  }
+}

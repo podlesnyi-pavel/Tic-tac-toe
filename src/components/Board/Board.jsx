@@ -2,7 +2,7 @@ import './Board.scss';
 import { Square } from '../Square';
 import classNames from 'classnames';
 
-export const Board = ({ squares, click, winnerLine, win }) => {
+export const Board = ({ squares, click, winnerLine }) => {
   return (
     <div className='board'>
       {squares.map((square, i) => (

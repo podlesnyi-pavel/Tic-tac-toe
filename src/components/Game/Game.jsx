@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import classNames from 'classnames';
+import { useState } from 'react';
 import { Board } from '../Board/Board';
 import './Game.scss';
 
@@ -9,18 +10,37 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   const [winsPlayerTwo, setWinsPlayerTwo] = useState(0);
   const [preventWinner, setPreventWinner] = useState('playerOne');
   const [winnerLine, setWinnerLine] = useState(null);
+  const [isVisibleWinnerModal, setIsVisibleWinnerModal] = useState(false);
+  const [isVisibleDrowModal, setIsVisibleDrowModal] = useState(false);
 
-  const win = (winner) => {
-    alert(`${winner} win`);
+  const startNewGame = () => {
+    setIsVisibleWinnerModal(false);
+    setIsVisibleDrowModal(false);
+    setBoard(Array(9).fill(''));
+    setWinnerLine(null);
+    setXIsNext(true);
+  };
+
+  const win = (index) => {
+    setWinnerLine(index);
+    setIsVisibleWinnerModal(true);
+
+    setTimeout(() => {
+      startNewGame();
+    }, 2000);
   };
 
   const draw = () => {
-    setBoard(Array(9).fill(''));
-    setXIsNext(true);
-    alert('Draw');
+    setIsVisibleDrowModal(true);
+
+    setTimeout(() => {
+      startNewGame();
+    }, 2000);
   };
 
   const checkWinner = (boardCopy) => {
+    console.log(boardCopy);
+
     let winnerLines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -36,7 +56,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
     
     for (let i = 0; i < winnerLines.length; i++) {
       const [a, b, c] = winnerLines[i];
-
+      console.log(invalidLines);
       if (
         (boardCopy[a] === 'X'
         || boardCopy[b] === 'X'
@@ -46,7 +66,6 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
         || boardCopy[c] === 'O')
       ) {
         invalidLines += 1;
-        
         invalidLines === 8 && draw();
       }
       
@@ -56,22 +75,20 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
         if (preventWinner === 'playerOne' && boardCopy[a] ==='X') {
           setWinsPlayerOne(winsPlayerOne + 1)
           setPreventWinner('playerOne');
-          win(namePlayerOne);
+          win(i);
         } else if (preventWinner === 'playerOne' && boardCopy[a] ==='O') {
           setWinsPlayerTwo(winsPlayerTwo + 1)
           setPreventWinner('playerTwo');
-          win(namePlayerTwo);
+          win(i);
         } else if (preventWinner === 'playerTwo' && boardCopy[a] ==='X') {
           setWinsPlayerTwo(winsPlayerTwo + 1)
           setPreventWinner('playerTwo');
-          win(namePlayerTwo);
+          win(i);
         } else if (preventWinner === 'playerTwo' && boardCopy[a] ==='O') {
           setWinsPlayerTwo(winsPlayerOne + 1)
           setPreventWinner('playerOne');
-          win(namePlayerOne);
+          win(i);
         }
-
-        setWinnerLine(i);
       }
     }
   }
@@ -93,25 +110,32 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   return (
     <>
       <div className='game'>
-      <Board
-        squares={board}
-        click={handlerClick}
-        winnerLine={winnerLine}
-        win={win}
-      />
-      <div className="game__score">
-        <span>Score</span>
-        <span>{namePlayerOne}: {winsPlayerOne}</span>
-        <span>{namePlayerTwo}: {winsPlayerTwo}</span>
+        <Board
+          squares={board}
+          click={handlerClick}
+          winnerLine={winnerLine}
+          win={win}
+        />
+        <div className="game__score">
+          <span>Score</span>
+          <span>{namePlayerOne}: {winsPlayerOne}</span>
+          <span>{namePlayerTwo}: {winsPlayerTwo}</span>
+        </div>
       </div>
-    </div>
-    <button className='game__button' onClick={() => {
-      setBoard(Array(9).fill(''));
-      setWinnerLine(null);
-      setXIsNext(true);
-    }}>
-      Новая игра
-    </button>
+
+      <div className={classNames(
+        "resultModal",
+        isVisibleWinnerModal && 'resultModal--visible'
+      )}>
+        {preventWinner === 'playerOne'
+          ? `${namePlayerOne} win!`
+          : `${namePlayerTwo} win!`} 
+      </div>
+
+      <div className={classNames(
+        "resultModal",
+        isVisibleDrowModal && 'resultModal--visible'
+      )}>Drow</div>
     </>
   );
 }
