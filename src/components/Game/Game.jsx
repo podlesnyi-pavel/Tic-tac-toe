@@ -13,6 +13,10 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   const [isVisibleWinnerModal, setIsVisibleWinnerModal] = useState(false);
   const [isVisibleDrowModal, setIsVisibleDrowModal] = useState(false);
 
+  const checkLengthName = (name) => {
+    return name.length > 10 ? name.slice(0, 7) + '.. ' : name;
+  };
+
   const startNewGame = () => {
     setIsVisibleWinnerModal(false);
     setIsVisibleDrowModal(false);
@@ -39,8 +43,6 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   };
 
   const checkWinner = (boardCopy) => {
-    console.log(boardCopy);
-
     let winnerLines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -56,7 +58,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
     
     for (let i = 0; i < winnerLines.length; i++) {
       const [a, b, c] = winnerLines[i];
-      console.log(invalidLines);
+
       if (
         (boardCopy[a] === 'X'
         || boardCopy[b] === 'X'
@@ -118,8 +120,14 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
         />
         <div className="game__score">
           <span>Score</span>
-          <span>{namePlayerOne}: {winsPlayerOne}</span>
-          <span>{namePlayerTwo}: {winsPlayerTwo}</span>
+
+          <span title={namePlayerOne}>
+            {checkLengthName(namePlayerOne)}: {winsPlayerOne}
+          </span>
+
+          <span title={namePlayerTwo}>
+            {checkLengthName(namePlayerTwo)}: {winsPlayerTwo}
+          </span>
         </div>
       </div>
 
@@ -135,7 +143,9 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
       <div className={classNames(
         "resultModal",
         isVisibleDrowModal && 'resultModal--visible'
-      )}>Drow</div>
+      )}>
+        Drow
+      </div>
     </>
   );
 }

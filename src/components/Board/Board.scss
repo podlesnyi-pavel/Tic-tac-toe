@@ -1,18 +1,38 @@
 @import '../../styles/main.scss';
 
+$height-line: 8px;
+$width-line: 340px;
+
 .board {
   position: relative;
-  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   @include square($size-board + 20px);
-  background-color: $secondary-color;
   cursor: pointer;
 
-  &__svg {
-    @include position-center();
-    @include square(380px);
+  &::before {
+    content: '';
+    position: absolute;
+    top: $size-square;
+    left: 50%;
+    transform: translateX(-50%);
+    height: $height-line;
+    width: $width-line;
+    border-radius: 2px;
+    background-color: $color-purple;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: $size-square * 2 + 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: $height-line;
+    width: $width-line;
+    border-radius: 2px;
+    background-color: $color-purple;
   }
 
   &__line {

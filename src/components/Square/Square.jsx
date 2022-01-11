@@ -1,7 +1,9 @@
 import './Square.scss';
+import classNames from 'classnames';
 
-export const Square = ({ value, onClick }) => {
-  return (
-    <button className='square' onClick={onClick}>{value}</button>
-  );
-}
+export const Square = ({ value, index, onClick }) => (
+  <button className={classNames(
+    'square',
+    index === 4 && 'square--center'
+  )} onClick={onClick}>{value}</button>
+);
