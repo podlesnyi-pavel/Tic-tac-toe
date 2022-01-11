@@ -79,7 +79,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   const handlerClick = (index) => {
     const boardCopy = [...board];
 
-    if (boardCopy[index]) {
+    if (boardCopy[index] || winnerLine) {
       return;
     }
 
