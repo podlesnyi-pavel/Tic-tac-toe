@@ -15,7 +15,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   };
 
   const draw = () => {
-    alert('Ничья');
+    alert('Draw');
     setBoard(Array(9).fill(''));
   };
 
@@ -49,9 +49,9 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
         invalidLines === 8 && draw();
       }
       
-      if (
-        boardCopy[a] && (boardCopy[a] === boardCopy[b]) && (boardCopy[a] === boardCopy[c])
-      ) {
+      if (boardCopy[a]
+        && (boardCopy[a] === boardCopy[b])
+        && (boardCopy[a] === boardCopy[c])) {
         if (preventWinner === 'playerOne' && boardCopy[a] ==='X') {
           setWinsPlayerOne(winsPlayerOne + 1)
           setPreventWinner('playerOne');

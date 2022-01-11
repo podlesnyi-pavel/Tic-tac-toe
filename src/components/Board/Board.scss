@@ -1,7 +1,83 @@
 @import '../../styles/main.scss';
 
 .board {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  @include square(300px);
+  @include square($size-board);
+
+  &__line {
+    position: absolute;
+    border-radius: 2px;
+    background-color: #f00;
+    visibility: hidden;
+
+    &--horizontal {
+      left: 50%;
+      height: 8px;
+      width: $size-board - 20px;
+
+      &--1 {
+        top: $size-square / 2;
+        transform: translate(-50%);
+        visibility: visible;
+      }
+
+      &--2 {
+        top: 50%;
+        transform: translate(-50%, -50%);
+        visibility: visible;
+      }
+
+      &--3 {
+        bottom: $size-square / 2;
+        transform: translate(-50%);
+        visibility: visible;
+      }
+    }
+
+    &--vertical {
+      top: 50%;
+      height: $size-board - 20px;
+      width: 8px;
+
+      &--1 {
+        left: $size-square / 2;
+        transform: translate(-50%, - 50%);
+        visibility: visible;
+      }
+
+      &--2 {
+        left: 50%;
+        transform: translate(-50%, - 50%);
+        visibility: visible;
+      }
+
+      &--3 {
+        right: $size-square / 2;
+        transform: translate(-50%, - 50%);
+        visibility: visible;
+      }
+    }
+
+    &--oblique {
+      top: 0;
+      height: $size-board + 20px;
+      width: 8px;
+
+      &--1 {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        visibility: visible;
+      }
+
+      &--2 {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        visibility: visible;
+      }
+    }
+  }
 }

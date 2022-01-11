@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include square(100px);
+  @include square($size-board / $lines-board);
   background-color: $secondary-color;
   border: 1px solid #222;
   font-size: 80px;
