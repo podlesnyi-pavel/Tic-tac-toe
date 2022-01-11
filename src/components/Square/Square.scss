@@ -1,19 +1,21 @@
 @import '../../styles/main.scss';
 
 .square {
+  position: relative;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
   @include square($size-board / $lines-board);
   background-color: $secondary-color;
-  border: 1px solid #222;
+  border: 1px solid transparent;
   font-size: 80px;
   color: #eed;
   text-transform: uppercase;
   outline: none;
 
-  // &:hover {
-  //   background-color: #f0f0f0;
-  //   transition: $transition-duration-default;
-  // }
+  &:hover {
+    background-color: #543766;
+    transition: $transition-duration-default;
+  }
 }

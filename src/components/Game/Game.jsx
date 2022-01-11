@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Board } from '../Board/Board';
 import './Game.scss';
 
@@ -8,15 +8,16 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   const [winsPlayerOne, setWinsPlayerOne] = useState(0);
   const [winsPlayerTwo, setWinsPlayerTwo] = useState(0);
   const [preventWinner, setPreventWinner] = useState('playerOne');
+  const [winnerLine, setWinnerLine] = useState(null);
 
   const win = (winner) => {
     alert(`${winner} win`);
-    setBoard(Array(9).fill(''));
   };
 
   const draw = () => {
-    alert('Draw');
     setBoard(Array(9).fill(''));
+    setXIsNext(true);
+    alert('Draw');
   };
 
   const checkWinner = (boardCopy) => {
@@ -28,7 +29,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
       [1, 4, 7],
       [2, 5, 8],
       [0, 4, 8],
-      [2, 4, 6]
+      [2, 4, 6],
     ];
 
     let invalidLines = 0;
@@ -70,8 +71,7 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
           win(namePlayerOne);
         }
 
-        setBoard(Array(9).fill(''));
-        setXIsNext(true);
+        setWinnerLine(i);
       }
     }
   }
@@ -91,13 +91,27 @@ export const Game = ({ namePlayerOne, namePlayerTwo }) => {
   };
 
   return (
-    <div className='game'>
-      <Board squares={board} click={handlerClick} />
+    <>
+      <div className='game'>
+      <Board
+        squares={board}
+        click={handlerClick}
+        winnerLine={winnerLine}
+        win={win}
+      />
       <div className="game__score">
         <span>Score</span>
         <span>{namePlayerOne}: {winsPlayerOne}</span>
         <span>{namePlayerTwo}: {winsPlayerTwo}</span>
       </div>
     </div>
+    <button className='game__button' onClick={() => {
+      setBoard(Array(9).fill(''));
+      setWinnerLine(null);
+      setXIsNext(true);
+    }}>
+      Новая игра
+    </button>
+    </>
   );
 }

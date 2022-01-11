@@ -2,15 +2,25 @@
 
 .board {
   position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  @include square($size-board);
+  gap: 10px;
+  @include square($size-board + 20px);
+  background-color: $secondary-color;
+  cursor: pointer;
+
+  &__svg {
+    @include position-center();
+    @include square(380px);
+  }
 
   &__line {
     position: absolute;
+    z-index: 200;
     border-radius: 2px;
     background-color: #f00;
-    visibility: hidden;
+    display: none;
 
     &--horizontal {
       left: 50%;
@@ -20,19 +30,19 @@
       &--1 {
         top: $size-square / 2;
         transform: translate(-50%);
-        visibility: visible;
+        display: block;
       }
 
       &--2 {
         top: 50%;
         transform: translate(-50%, -50%);
-        visibility: visible;
+        display: block;
       }
 
       &--3 {
         bottom: $size-square / 2;
         transform: translate(-50%);
-        visibility: visible;
+        display: block;
       }
     }
 
@@ -44,19 +54,19 @@
       &--1 {
         left: $size-square / 2;
         transform: translate(-50%, - 50%);
-        visibility: visible;
+        display: block;
       }
 
       &--2 {
         left: 50%;
         transform: translate(-50%, - 50%);
-        visibility: visible;
+        display: block;
       }
 
       &--3 {
         right: $size-square / 2;
         transform: translate(-50%, - 50%);
-        visibility: visible;
+        display: block;
       }
     }
 
@@ -69,14 +79,14 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(-45deg);
-        visibility: visible;
+        display: block;
       }
 
       &--2 {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
-        visibility: visible;
+        display: block;
       }
     }
   }
