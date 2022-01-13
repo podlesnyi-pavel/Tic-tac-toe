@@ -1,6 +1,6 @@
 # `Tic tac toe`
 
-[Demo](https://podlesnyi-pavel.github.io/iteam//)
+[Demo](https://podlesnyi-pavel.github.io/Tic-tac-toe/)
 
 ## `start project`
 
